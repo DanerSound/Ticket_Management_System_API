@@ -1,6 +1,8 @@
 package models
 
 import (
+	"fmt"
+	"strings"
 	"tickets_manager/pkg/config"
 
 	"github.com/jinzhu/gorm"
@@ -22,11 +24,24 @@ func init() {
 	db.AutoMigrate(&Ticket{})
 }
 
-func (ticket *Ticket) CreateTicket() *Ticket {
-	db.NewRecord(ticket)
-	db.Create(&ticket)
+func (ticket *Ticket) CreateTicket() (*Ticket, error) {
+	if validityCheck(ticket) {
+		db.NewRecord(ticket)
+		db.Create(&ticket)
+		return ticket, nil
+	}
+	return nil, fmt.Errorf("invalid ticket")
+}
 
-	return ticket
+// this function controllo the validity of the input it can be improved
+func validityCheck(ticket *Ticket) bool {
+	isValid := false
+	isValidFullName := len(ticket.Name) >= 2 && len(ticket.Surname) >= 2
+	isValidEmail := strings.Contains(ticket.Email, "@")
+	if isValidFullName && isValidEmail {
+		isValid = true
+	}
+	return isValid
 }
 
 func GetAllTickets() []Ticket {
@@ -46,7 +61,6 @@ func GetTicketByMail(mail string) (*Ticket, *gorm.DB) {
 }
 
 func DeleteTicket(email string) Ticket {
-	//var ticket Ticket
 	ticketDetails, _ := GetTicketByMail(email)
 	db.Where("email=?", email).Delete(ticketDetails)
 	return *ticketDetails

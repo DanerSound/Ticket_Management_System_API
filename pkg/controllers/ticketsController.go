@@ -10,7 +10,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-const availableTickets = 10
+const availableTickets = 5
 
 var remainingTickets = 5
 
@@ -25,7 +25,15 @@ func CreateTickets(w http.ResponseWriter, r *http.Request) {
 		w.Write(res)
 		return
 	}
-	ticket := createTicket.CreateTicket()
+	ticket, err := createTicket.CreateTicket()
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusNotAcceptable)
+		errorResponse := map[string]string{"Error": " inserted values not valid! Check them!"}
+		res, _ := json.Marshal(errorResponse)
+		w.Write(res)
+		return
+	}
 	res, _ := json.Marshal(ticket)
 	w.WriteHeader(http.StatusOK)
 	remainingTickets = remainingTickets - 1
