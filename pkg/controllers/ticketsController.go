@@ -10,15 +10,27 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const availableTickets = 10
+
+var remainingTickets = 5
+
 func CreateTickets(w http.ResponseWriter, r *http.Request) {
 	createTicket := &models.Ticket{}
-
 	utils.ParseBody(r, createTicket)
+	if remainingTickets == 0 {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusNotAcceptable)
+		errorResponse := map[string]string{"Error": " Sorry but no Tickets Available!"}
+		res, _ := json.Marshal(errorResponse)
+		w.Write(res)
+		return
+	}
 	ticket := createTicket.CreateTicket()
 	res, _ := json.Marshal(ticket)
-
 	w.WriteHeader(http.StatusOK)
+	remainingTickets = remainingTickets - 1
 	w.Write(res)
+
 }
 
 func GetTickets(w http.ResponseWriter, r *http.Request) {
@@ -63,6 +75,9 @@ func DeleteTicket(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", "pkglication/json")
 	w.WriteHeader(http.StatusOK)
+	if remainingTickets != availableTickets {
+		remainingTickets = remainingTickets + 1
+	}
 	w.Write(res)
 }
 
@@ -90,9 +105,5 @@ func UpdateTicket(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "pkglication/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
-
-}
-
-func BuyTickets(w http.ResponseWriter, r *http.Request) {
 
 }
