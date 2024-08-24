@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"andre33\",\n    \"surname\": \"asdf33\",\n    \"email\": \"andre33@mail.com\",\n    \"numert\": 3\n}",
+					"raw": "    {\n        \"name\": \"TEST\",\n        \"surname\": \"REALE\",\n        \"email\": \"TEST_REALE@mail.com\",\n        \"numert\": \"3\"\n    }\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -65,7 +65,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "127.0.0.1:9010/tickets/test1@mail.com",
+					"raw": "127.0.0.1:9010/tickets/marco44rosso@mail.com",
 					"host": [
 						"127",
 						"0",
@@ -75,7 +75,7 @@
 					"port": "9010",
 					"path": [
 						"tickets",
-						"test1@mail.com"
+						"marco44rosso@mail.com"
 					]
 				}
 			},
@@ -87,7 +87,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "127.0.0.1:9010/ticket/asdasd@mail.com",
+					"raw": "127.0.0.1:9010/ticket/TEST_REALE@mail.com",
 					"host": [
 						"127",
 						"0",
@@ -97,7 +97,7 @@
 					"port": "9010",
 					"path": [
 						"ticket",
-						"asdasd@mail.com"
+						"TEST_REALE@mail.com"
 					]
 				}
 			},
@@ -110,7 +110,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"andre33up\",\n    \"surname\": \"asdf33up\",\n    \"email\": \"andre33@mail.com\",\n    \"numert\": 3\n}",
+					"raw": "    {\n        \"name\": \"TEST\",\n        \"surname\": \"REALE\",\n        \"email\": \"TEST_REALE@mail.com\",\n        \"numert\": \"3\"\n    }\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -118,7 +118,7 @@
 					}
 				},
 				"url": {
-					"raw": "127.0.0.1:9010/tickets/asdasd@mail.com",
+					"raw": "127.0.0.1:9010/tickets/andre33@mail.com",
 					"host": [
 						"127",
 						"0",
@@ -128,7 +128,7 @@
 					"port": "9010",
 					"path": [
 						"tickets",
-						"asdasd@mail.com"
+						"andre33@mail.com"
 					]
 				}
 			},
